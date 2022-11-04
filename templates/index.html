@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recomendation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body class="bg-info">
+    <div class="p-3 text-white">
+        <div class="row">
+            <div class="col-6">
+                <form method="post">
+                    <div class="form-group">
+                        <label for="sel1">Choose a book</label>
+                        <select class="form-control" id="sel1" name="selected_title"  style="width:350px;">
+                            {% for title in list_books %}
+                            <option>{{ title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <input type="submit" class="btn btn-light" value="Recommend"/>
+                </form>
+            </div>
+        </div>
+        <div class='row justify-center'>
+            <div class="col-6">
+                {% if book_selected is defined %}
+                <h2>Selected book</h2>
+                <img src="{{ book_selected.image }}" style="width:300px;">
+                {% endif %}
+            </div>
+        </div>
+        {% if similar_books is defined %}
+        <h2>Recommendations</h2>
+        <div class="row justify-content-center">
+            {% for book in similar_books[:5] %}
+            <div class="col-2 p-3 d-flex justify-content-center" style="width:300px;">
+                <img src="{{ book.image }}">
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
